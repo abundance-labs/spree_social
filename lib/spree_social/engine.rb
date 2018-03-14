@@ -42,7 +42,7 @@ module SpreeSocial
     return unless ActiveRecord::Base.connection_pool.with_connection { |con| con.active? }  rescue false
     return unless ActiveRecord::Base.connection.data_source_exists?('spree_authentication_methods')
     key, secret = nil
-    Spree::AuthenticationMethod.where(environment: ::Rails.env).each do |auth_method|
+    Spree::AuthenticationMethod.active.where(environment: ::Rails.env).each do |auth_method|
       next unless auth_method.provider == provider
       key = auth_method.api_key
       secret = auth_method.api_secret
