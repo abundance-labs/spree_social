@@ -74,6 +74,6 @@ RSpec.feature 'signing in using Omniauth', :js do
 
   def click_facebook_link
     click_link('Login with facebook')
-    expect(page).to have_text 'You are now signed in with your facebook account.'
+    expect(page).to have_text 'You are now signed in with your Facebook account.'
   end
 end
