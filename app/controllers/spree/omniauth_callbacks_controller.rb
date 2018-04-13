@@ -31,7 +31,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             user = Spree::User.find_by_email(auth_hash['info']['email']) || Spree::User.new
             user.apply_omniauth(auth_hash)
             if user.save
-              flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: pretty_provider_name)
+              flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: pretty_provider_name) if user.active_for_authentication?
               sign_in_and_redirect :spree_user, user
             else
               session[:omniauth] = auth_hash.except('extra')
